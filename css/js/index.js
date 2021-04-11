@@ -23,7 +23,7 @@ class Timer {
             return;
         }
 
-        const startTime = new Date('July 10 2021');
+        const startTime = new Date('May 1 2021');
         console.log(startTime);
         this.isActive = true;
 
@@ -45,7 +45,12 @@ class Timer {
         this.onTick(time);
     }
 
-
+    /*
+     * - Принимает время в миллисекундах
+     * - Высчитывает сколько в них вмещается часов/минут/секунд
+     * - Возвращает обьект со свойствами hours, mins, secs
+     * - Адская копипаста со стека 💩
+     */
     getTimeComponents(time) {
         const days = this.pad(Math.floor(time / (1000 * 60 * 60 * 24)));
         const hours = this.pad(
@@ -57,6 +62,9 @@ class Timer {
         return { days, hours, mins, secs };
     }
 
+    /*
+     * Принимает число, приводит к строке и добавляет в начало 0 если число меньше 2-х знаков
+     */
     pad(value) {
         return String(value).padStart(2, '0');
     }
@@ -69,6 +77,11 @@ const timer = new Timer({
 refs.startBtn.addEventListener('click', timer.start.bind(timer));
 refs.stopBtn.addEventListener('click', timer.stop.bind(timer));
 
+/*
+ * - Принимает время в миллисекундах
+ * - Высчитывает сколько в них вмещается часов/минут/секунд
+ * - Рисует интерфейс
+ */
 function updateClockface({ days, hours, mins, secs }) {
     refs.clockface.textContent = `${days}:${hours}:${mins}:${secs}`;
 }
